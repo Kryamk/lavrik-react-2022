@@ -19,8 +19,8 @@ export default class extends React.Component{
 	}
 }
 
-/* 
+/*
 onClick
 onDoubleClick
-onChange -> input 
+onChange -> input
 */

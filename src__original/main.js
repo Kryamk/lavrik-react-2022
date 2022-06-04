@@ -34,7 +34,7 @@ some.fn();
 let { fn } = some;
 fn(); */
 
-/* 
+/*
 let { name, text } = props;
 let name = props.name;
 let text = props.text;

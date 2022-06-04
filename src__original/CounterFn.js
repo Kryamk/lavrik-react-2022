@@ -15,10 +15,10 @@ export default function({ max }){
 	</div>
 }
 
-/* 
+/*
 let [ current, setCurrent ] = useState(1);
 
 let some = useState(0);
 let current = some[0];
-let setCurrent = some[1]; 
+let setCurrent = some[1];
 */

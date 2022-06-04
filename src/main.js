@@ -2,21 +2,27 @@ import React from 'react';
 import ReactDom from 'react-dom';
 
 import UserCard from './UserCard';
+import CounterClass from './CounterClass';
+import CounterFn from './CounterFn';
 
 ReactDom.render(
 	<div className="some">
-		<h2>Hello World!</h2>
+		<h2>Hello World!!!</h2>
 		<hr />
 		<UserCard name="Ivan" text="Hi there!" title="title555" />
 		<UserCard name="Anny" text="Hi there!" />
 		<UserCard name="Kryamk" text="Hi there!" />
+		<hr />
+		<CounterClass test1= "foo" test2 = {555} test3 = {true} />
+		<hr />
+		<CounterFn />
 		<hr />
 		<div>Footer</div>
 	</div>,
 	document.querySelector('.app')
 );
 
-// 1 video
+// 1 VIDEO
 /*
 	Каждый элемент JSX является просто синтаксическим сахаром для вызова React.createElement().
 	React.createElement( type, [props], [...children] )
@@ -58,19 +64,27 @@ ReactDom.render(
 
 
 
-// 2 video
+// 2 VIDEO
 /*
+	export default class extends React.PureComponent // Хуки типа shouldComponentUpdate уже реализовано, не будет лишний раз рендерится
 
+	onClick
+	onDoubleClick
+	onChange -> input , любое изменение символов в поле
+	Не понятно как подписаться на нативное событие change
+	В js onchange - при потери фокуса
+	keydown keyup - клавиатура без учета мышки (клик с зажатой клавишой)
 
+	Не можешь в input передать value не подписавшись на onChange, ты тогда должен сделать input редонга?
+	те инпуты либо полностью контролируемые либо полностью нет
+	https://www.mousedc.ru/learning/510-inputy-steytakh-react/
+	https://stackoverflow.com/questions/41736213/why-cant-i-change-my-input-value-in-react-even-with-the-onchange-listener
+	https://qna.habr.com/q/524436
 
+	Выделил hr снизу вверх
 
-
-
-
-
-
-
-
+	https://redux-toolkit.js.org/ доп бибилиотека помогает с redux, убирает однотипный код
+	Место где лежит состояние приложения, которое нужно разным компонентам. (список товаров в корзине)
 
 
 

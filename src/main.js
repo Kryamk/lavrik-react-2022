@@ -9,20 +9,26 @@ ReactDom.render(
 	<div className="some">
 		<h2>Hello World!!!</h2>
 		<hr />
+
 		<UserCard name="Ivan" text="Hi there!" title="title555" />
 		<UserCard name="Anny" text="Hi there!" />
 		<UserCard name="Kryamk" text="Hi there!" />
 		<hr />
-		<CounterClass test1= "foo" test2 = {555} test3 = {true} />
+
+		<h3>Class max=3</h3>
+		<CounterClass max={3} test1= "foo" test2 = {555} test3 = {true} />
 		<hr />
-		<CounterFn />
+
+		<h3>Fn max=5</h3>
+		<CounterFn max={5} />
 		<hr />
+
 		<div>Footer</div>
 	</div>,
 	document.querySelector('.app')
 );
 
-// 1 VIDEO
+// 1-1 VIDEO
 /*
 	Каждый элемент JSX является просто синтаксическим сахаром для вызова React.createElement().
 	React.createElement( type, [props], [...children] )
@@ -64,7 +70,7 @@ ReactDom.render(
 
 
 
-// 2 VIDEO
+// 1-2 VIDEO
 /*
 	export default class extends React.PureComponent // Хуки типа shouldComponentUpdate уже реализовано, не будет лишний раз рендерится
 
@@ -85,6 +91,14 @@ ReactDom.render(
 
 	https://redux-toolkit.js.org/ доп бибилиотека помогает с redux, убирает однотипный код
 	Место где лежит состояние приложения, которое нужно разным компонентам. (список товаров в корзине)
+
+	HOMEWORK
+	Тренажер: https://webdevskills.com/ admir - логин и пароль
+	1. min max
+	2. min max - должны быть по дефолту или обязательными для передачи. Нужна библиотека контролирующая входные параметры PropTypes
+	3. <span>{current}</span> в input переделать, чтобы при вводе меняли
+
+
 
 
 

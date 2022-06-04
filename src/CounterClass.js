@@ -4,27 +4,17 @@ export default class extends React.Component {
 	state = {
 		current: 1
 	}
-	// inc() {
-	// 	console.log('---',this); //undefined
-	// 	this.setState({current: this.state.current + 1}) // Uncaught TypeError: Cannot read properties of undefined (reading 'setState')
-	// }
 	inc = () => {
-		// console.log('---',this); //undefined
-		this.setState({current: this.state.current + 1}) // Uncaught TypeError: Cannot read properties of undefined (reading 'setState')
+		if (this.state.current < this.props.max) {
+			this.setState({current: this.state.current + 1})
+		}
 	}
 	render() {
-		// console.log('---',this); //__webpack_exports__.default { context, props, refs, state, test, updater, _reactInternalInstance, _reactInternals }
 		return <div>
 			<span>{this.state.current}</span>
-			{/* <button type="button" onClick={() => this.state.current++}>+</button> --- не работает, нужно вызывать метод setState */}
-			{/* <button type="button" onClick={() => this.setState({current: this.state.current + 1})}>+</button> */}
 			<button type="button" onClick={this.inc}>+</button>
-			{/* {this.test()} */}
 		</div>
 	}
-	// test = () => {
-	// 	console.log( typeof this.props.test3);
-	// }
 }
 
 
@@ -52,6 +42,23 @@ export default class extends React.Component {
 Компоненты меняются если меняется их стейт или пропсы
 
 Раньше делали как обертки например для изменения размера окна.
+
+// console.log('---',this); //__webpack_exports__.default { context, props, refs, state, test, updater, _reactInternalInstance, _reactInternals }
+
+<button type="button" onClick={() => this.state.current++}>+</button> --- не работает, нужно вызывать метод setState
+<button type="button" onClick={() => this.setState({current: this.state.current + 1})}>+</button>
+
+{this.test()}
+// test = () => {
+// 	console.log( typeof this.props.test3);
+// }
+
+Библиотека PropTypes для проверки типов https://ru.react.js.org/docs/typechecking-with-proptypes.html   TypeScript то нету
+
+Компонент на основе класса пропсы принимает в конструктор. Конструктор базового класса React.Component выполняет это и мы получаем this.props.max
+
+useState можно использовать несколько раз
+
 
 
 

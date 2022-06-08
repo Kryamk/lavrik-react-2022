@@ -1,20 +1,41 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-export default function ({ max }) {
-	let [current, setCurrent] = useState(1);
+function CounterFn ({ min=0, max }) {
+	let [current, setCurrent] = useState(3);
 
-	function inc() {
+	function incMinus() {
+		if (current > min) {
+			setCurrent(current - 1);
+		}
+	}
+	function incPlus() {
 		if (current < max) {
 			setCurrent(current + 1);
 		}
 	}
+	function change(e) {
+		if (e.target.value >= min && e.target.value <= max) {
+			setCurrent(e.target.value)
+		}
+	}
+
 
 	return <div>
+		<button type="button" onClick={incMinus}>-</button>
 		<span>{current}</span>
+		<input type="number" placeholder="tut texter figach" value={current} onChange={change} />
+		<button type="button" onClick={incPlus}>+</button>
 		{/* <button type="button" onClick={() => setCurrent(current + 1)}>+</button> */}
-		<button type="button" onClick={inc}>+</button>
 	</div>
 }
+
+CounterFn.propTypes = {
+	min: PropTypes.number,
+	max: PropTypes.number.isRequired
+}
+export default CounterFn
+
 
 
 

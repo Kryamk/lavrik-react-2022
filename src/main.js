@@ -15,12 +15,13 @@ ReactDom.render(
 		<UserCard name="Kryamk" text="Hi there!" />
 		<hr />
 
-		<h3>Class max=3</h3>
-		<CounterClass max={3} test1= "foo" test2 = {555} test3 = {true} />
+		<h3>Class min=1 max=3</h3>
+		<CounterClass max={3} min={1} test1= "foo" test2 = {555} test3 = {true} />
 		<hr />
 
-		<h3>Fn max=5</h3>
-		<CounterFn max={5} />
+		<h3>Fn min=0 max=5</h3>
+		<CounterFn max={5}/>
+		{/* <CounterFn/> */}
 		<hr />
 
 		<div>Footer</div>

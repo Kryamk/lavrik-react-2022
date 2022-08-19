@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import App from './App';
+// import App from './lessons/video-3/App'; // Тотал цены, удаление товара, ленивый инпут на стейтах и рефах
+// import App from './lessons/video-3/App';
+// import App from './lessons/video-3/App';
+// import App from './lessons/video-3/App';
+
 
 
 

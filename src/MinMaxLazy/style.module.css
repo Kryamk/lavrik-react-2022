@@ -1,0 +1,10 @@
+.inp {
+	width: 50px;
+}
+.custom-modal {
+	display: none;
+	background-color: aliceblue;
+}
+.custom-modal.open {
+	display: block;
+}

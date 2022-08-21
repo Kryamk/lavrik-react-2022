@@ -1,23 +1,18 @@
-import { array } from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import MinMax from './MinMaxLazy';
+import ProductCard from './ProductCard';
+import './style.css';
 
 
 export default function () {
 	let [products, setProducts] = useState(productsStub());
 	let total = products.reduce( (sum, current) => sum + current.price * current.cnt, 0);
-	// let total = products.reduce( (sum, current) => { return sum + current.price * current.cnt; }, 0);
+	// let total = useMemo( () => products.reduce( (sum, current) => sum + current.price * current.cnt, 0), [products] );
+
 	let setCnt = (id, cnt) => {
 		let newProducts = products.map(pr => pr.id != id ? pr : ({ ...pr, cnt }));
 		setProducts([...newProducts]);
 	}
-
-	// sum();
-	// function sum() {
-	// 	total = products.reduce( (prev, current) => {
-	// 		return prev + current.price * current.cnt;
-	// 	}, 0);
-	// }
 
 
 	function del(id) {
@@ -27,8 +22,7 @@ export default function () {
 
 
 	return (
-		<div className="some">
-			{/* { products.length } */}
+		<div className="some container mt-1">
 
 			<h1>Products list</h1>
 			<table>
@@ -58,6 +52,8 @@ export default function () {
 				</tbody>
 			</table>
 			<h2>Total: {total}</h2>
+			<hr />
+			<ProductCard test='test' />
 
 
 

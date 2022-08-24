@@ -1,16 +1,14 @@
-import React, { useRef, useEffect, useContext } from 'react';
+import React, { useRef, useEffect } from 'react';
 import propTypes from './props';
 import style from './style.module.css';
-
-import SettingContext from './../contexts/settings';
-
+// console.log('---',style);
 MinMaxLazy.propTypes = propTypes;
 
 function MinMaxLazy ({ min=1, max, current, onChange }) {
+	// console.log('---','MinMaxLazy');
 	let inp = useRef();
-
-	let settings = useContext(SettingContext);
-	// console.log('---',settings);
+	// let btnModal = useRef();
+	// let modal = useRef();
 
 	function onKeyPress(e) {
 		if ( e.key === 'Enter') {
@@ -37,6 +35,22 @@ function MinMaxLazy ({ min=1, max, current, onChange }) {
 
 
 
+	// useEffect( ()=> {
+	// 	btnModal.current.addEventListener('click', (e)=> {
+	// 		e.preventDefault();
+	// 		modal.current.classList.add(style.open);
+	// 	});
+	// 	document.addEventListener('click', (e)=> {
+	// 		if ( e.target !== btnModal.current &&  !modal.current.contains(e.target) ) {
+	// 			modal.current.classList.remove(style.open);
+	// 			console.log('---', e);
+	// 		}
+	// 	});
+	// }, [])
+
+
+
+
 	return <div>
 		<button className="btn btn-success" type="button" onClick={dec}>-</button>
 		<input
@@ -47,13 +61,11 @@ function MinMaxLazy ({ min=1, max, current, onChange }) {
 			onBlur={parseCurrentStr}
 			onKeyPress={onKeyPress}
 		/>
-		<button
-			className="btn btn-warning"
-			type="button"
-			onClick={inc}
-			title={settings.lang === 'ru' ? 'Увеличить' : 'Increase'}
-		>+</button>
+		<button className="btn btn-warning" type="button" onClick={inc}>+</button>
 
+
+		{/* <button ref={btnModal} type="button">Modal</button>
+		<div ref={modal} className={style['custom-modal']}><h2>Modal</h2></div> */}
 	</div>
 }
 

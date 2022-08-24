@@ -5,9 +5,3 @@ body {
 .card {
 	background-color: rebeccapurple;
 }
-.cart.light {
-	background: aliceblue;
-}
-.cart.dark {
-	background: darkcyan;
-}

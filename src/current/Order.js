@@ -1,78 +1,66 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState } from 'react';
+import { Modal, Button } from 'react-bootstrap';
 
-export default function({onPrev, onNext}) {
+export default function ({ fields, onChange, onPrev, onNext }) {
+	let isValid = fields.every(f => f.valid);
 
-	let inputName = useRef( );
+	let [ modalShow, setModalShow ] = useState(false);
+	let openModal = () => setModalShow(true);
+	let closeModal = () => setModalShow(false);
 
-	let inputTel = useRef();
-	let inputEmail = useRef();
+	let [ confirmed, setConfirmed ] = useState(false);
 
-	useEffect( ()=> {
-		inputName = {...inputName, name: 'name'};
-		console.log('---',inputName);
-	}, [])
-
-	let values = [
-		{
-			name: 'fio',
-			value: '',
-			validPattern: '',
-			valid: false,
-		},
-		{
-			name: 'tel',
-			value: '',
-			validPattern: '',
-			valid: false,
-		},
-		{
-			name: 'email',
-			value: '',
-			validPattern: '',
-			valid: false,
-		}
-	];
-
-	function fnValue(e) {
-		e.preventDefault();
-		let valueName = inputName.current.value;
-		let valueTel = inputTel.current.value;
-		let valueEmail = inputEmail.current.value;
-		values = values.map( (item)=> {
-			if (item.name == 'fio') {
-				let itemNew =  {...item, value : valueName};
-				let valid = valueName == '' ? false : true;
-				itemNew = {...itemNew, valid}
-				return itemNew;
-			}
-			else {
-				return item;
-			}
-		});
-		console.log('---',values);
-
+	let sendForm = () => {
+		setConfirmed(true);
+		closeModal();
 	}
-
+	let onExited = () => {
+		if (confirmed) {
+			onNext();
+		}
+	}
 
 
 	return <div>
 		<h1>Input Data</h1>
 		<hr />
 
-
-		<form action="#">
-			<input ref={inputName} type="text" placeholder='Имя'/>
-			<input ref={inputTel} type="text" placeholder='Телефон' />
-			<input ref={inputEmail} type="text" placeholder='Почта' />
-			<button onClick={fnValue}>Send</button>
+		<form className='bg-white p-3' action="#">
+			{fields.map(field => (
+				<div className="form-group" key={field.name}>
+					<label>{field.label}</label>
+					<input
+						type="text"
+						className={`form-control ${field.value.length && !field.valid ? 'border border-danger' : ''}`}
+						name={field.name}
+						value={field.value}
+						onChange={e => onChange(field.name, e.target.value.trim())}
+					/>
+				</div>
+			))}
 		</form>
-
-
-
 
 		<hr />
 		<button type='button' className='btn btn-warning' onClick={onPrev}>Back to cart</button>
-		<button type='button' className='btn btn-primary' onClick={onNext}>Move to Result</button>
+		<button type='button' className='btn btn-primary' onClick={openModal} disabled={!isValid}>Move to Result</button>
+
+		<Modal show={modalShow} onHide={closeModal} onExited={onExited}>
+			<Modal.Header closeButton>
+				<Modal.Title>Check data</Modal.Title>
+			</Modal.Header>
+
+			<Modal.Body>
+				<p>...</p>
+				<p>...</p>
+				<p>...</p>
+			</Modal.Body>
+
+			<Modal.Footer>
+				<Button variant="secondary" onClick={closeModal}>Close</Button>
+				<Button variant="primary" onClick={sendForm}>Ok, send</Button>
+			</Modal.Footer>
+		</Modal>
+
 		{/* <table>
 			<tbody>
 				<tr>

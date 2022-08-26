@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-
 import Cart from './Cart';
 import Order from './Order';
 import Result from './Result';
-
 import './style.css';
 
 import SettingContext from './contexts/settings';
@@ -22,15 +20,15 @@ export default function () {
 
 
 	/* products */
-	// let [ products, setProducts ] = useState(productsStub());
-	// let setProductCnt = (id, cnt) => {
-	// 	let newProducts = products.map(pr => pr.id != id ? pr : ({ ...pr, cnt }));
-	// 	setProducts([...newProducts]);
-	// }
-	// function removeProduct(id) {
-	// 	let newProducts = products.filter( pr => pr.id != id );
-	// 	setProducts([...newProducts]);
-	// }
+	let [ products, setProducts ] = useState(productsStub());
+	let setProductCnt = (id, cnt) => {
+		let newProducts = products.map(pr => pr.id != id ? pr : ({ ...pr, cnt }));
+		setProducts([...newProducts]);
+	}
+	function removeProduct(id) {
+		let newProducts = products.filter( pr => pr.id != id );
+		setProducts([...newProducts]);
+	}
 
 	/* Order form */
 	let [ orderForm, setOrderForm] = useState([
@@ -61,7 +59,7 @@ export default function () {
 		<SettingContext.Provider value={settings}>
 			<div className="some container mt-1">
 				{ page === 'cart' &&
-					<Cart onNext={moveToOrder} />
+					<Cart onNext={moveToOrder} products={products} onChange={setProductCnt} onRemove={removeProduct} />
 				}
 				{ page === 'order' &&
 					<Order
@@ -88,4 +86,38 @@ export default function () {
 			</div>
 		</SettingContext.Provider>
 	)
+}
+
+
+function productsStub() {
+	return [
+		{
+			id: 100,
+			title: 'Ipnone 200',
+			price: 12000,
+			rest: 10,
+			cnt: 1
+		},
+		{
+			id: 101,
+			title: 'Samsung AAZ8',
+			price: 22000,
+			rest: 5,
+			cnt: 1
+		},
+		{
+			id: 103,
+			title: 'Nokia 3310',
+			price: 5000,
+			rest: 2,
+			cnt: 1
+		},
+		{
+			id: 105,
+			title: 'Huawei ZZ',
+			price: 15000,
+			rest: 8,
+			cnt: 1
+		}
+	];
 }

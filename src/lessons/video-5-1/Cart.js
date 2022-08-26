@@ -1,13 +1,9 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import SettingContext from './contexts/settings';
 import MinMax from './MinMaxLazy';
 
-import { observer } from 'mobx-react-lite'; // Or "mobx-react".
-import cartStore from './store/cart';
-
-export default observer(Cart);
-function Cart({ onNext }) {
-	let { products, total, remove, change } = cartStore;
+export default function( {onNext, products, onChange, onRemove}) {
+	let total = products.reduce( (sum, current) => sum + current.price * current.cnt, 0);
 
 	let settings = useContext(SettingContext);
 	// console.log('---',settings);
@@ -19,7 +15,7 @@ function Cart({ onNext }) {
 
 
 
-	return <div className={className.join(' ')}>
+	return <div className={ className.join(' ') }>
 		<h1>Cart</h1>
 		<table>
 			<tbody>
@@ -39,10 +35,10 @@ function Cart({ onNext }) {
 						<td>{pr.price}</td>
 						<td>{pr.cnt}</td>
 						<td>{pr.cnt * pr.price}</td>
-						<td><MinMax min={1} max={pr.rest} current={pr.cnt} onChange={cnt => { change(pr.id, cnt) }} /></td>
+						<td><MinMax min={1} max={pr.rest} current={pr.cnt} onChange={cnt => onChange(pr.id, cnt)} /></td>
 						<td>
-							<button type="button" onClick={() => { remove(pr.id) }}>X</button>
-							<button type="button" onClick={() => { change(pr.id, pr.rest) }}>{settings.lang == 'ru' ? 'Макс' : 'Max'}</button>
+							<button type="button" onClick={ ()=> {onRemove(pr.id) }}>X</button>
+							<button type="button" onClick={ ()=> {onChange(pr.id, pr.rest) }}>{settings.lang == 'ru' ? 'Макс' : 'Max'}</button>
 						</td>
 					</tr>
 				))}

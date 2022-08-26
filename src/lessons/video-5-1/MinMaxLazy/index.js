@@ -1,20 +1,23 @@
 import React, { useRef, useEffect, useContext } from 'react';
 import propTypes from './props';
-
 import style from './style.module.css';
+
 import SettingContext from './../contexts/settings';
 
 MinMaxLazy.propTypes = propTypes;
 
 function MinMaxLazy ({ min=1, max, current, onChange }) {
 	let inp = useRef();
+
 	let settings = useContext(SettingContext);
+	// console.log('---',settings);
 
 	function onKeyPress(e) {
 		if ( e.key === 'Enter') {
 			parseCurrentStr(e);
 		}
 	}
+
 
 	function parseCurrentStr() {
 		let num = parseInt(inp.current.value);

@@ -1,22 +1,31 @@
 import React, { useContext } from 'react';
 import SettingContext from './contexts/settings';
-import MinMax from './MinMaxLazy';
 
+// import cartStore from './store/cart'; // 1й вариант с простым подключением
+// import StoreContext from './contexts/store'; // 2й вариант с контекстом, обернули в main.js
+import useStore from './hooks/useStore'; // 3й вариант с контекстом и кастомным хуком
+
+import MinMax from './MinMaxLazy';
 import { observer } from 'mobx-react-lite'; // Or "mobx-react".
-import cartStore from './store/cart';
+
 
 export default observer(Cart);
+
 function Cart({ onNext }) {
-	let { products, total, remove, change } = cartStore;
+
+	// let cart = cartStore; // 1й вариант с простым подключением
+	// let { cart } = useContext(StoreContext); // 2й вариант с контекстом
+	let [ cart, testStore ] = useStore('cart', 'testStore'); // 3й вариант с контекстом и кастомным хуком
+	// console.log('---',testStore);
+	let { products, total, remove, change } = cart;
+
+
 
 	let settings = useContext(SettingContext);
 	// console.log('---',settings);
-
 	let className = ['cart'];
 	let classTheme = settings.theme == 'light' ? 'light' : 'dark';
 	className.push(classTheme);
-
-
 
 
 	return <div className={className.join(' ')}>

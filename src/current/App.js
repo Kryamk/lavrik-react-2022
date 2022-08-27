@@ -8,6 +8,7 @@ import './style.css';
 
 import SettingContext from './contexts/settings';
 
+
 export default function () {
 
 	/* settings */

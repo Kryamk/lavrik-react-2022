@@ -15,7 +15,8 @@ function Cart({ onNext }) {
 
 	// let cart = cartStore; // 1й вариант с простым подключением
 	// let { cart } = useContext(StoreContext); // 2й вариант с контекстом
-	let [cart] = useStore('cart'); // 3й вариант с контекстом и кастомным хуком
+	let [ cart, testStore ] = useStore('cart', 'testStore'); // 3й вариант с контекстом и кастомным хуком
+	// console.log('---',testStore);
 	let { products, total, remove, change } = cart;
 
 

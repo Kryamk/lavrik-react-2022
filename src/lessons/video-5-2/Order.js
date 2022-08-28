@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-import useStore from './hooks/useStore';
-import { observer } from 'mobx-react-lite';
 
-export default observer(function ({ onPrev, onNext }) {
-	let [cart] = useStore('cart');
-	let [order] = useStore('order');
-	let { fields, orderFormUpdate, orderData } = order;
-	let orderFields = orderData();
+export default function ({ fields, onChange, onPrev, onNext }) {
 
 	let isValid = fields.every(f => f.valid);
 
@@ -42,7 +36,7 @@ export default observer(function ({ onPrev, onNext }) {
 						className={`form-control ${field.value.length && !field.valid ? 'border border-danger' : ''}`}
 						name={field.name}
 						value={field.value}
-						onChange={e => orderFormUpdate(field.name, e.target.value.trim())}
+						onChange={e => onChange(field.name, e.target.value.trim())}
 					/>
 				</div>
 			))}
@@ -58,11 +52,9 @@ export default observer(function ({ onPrev, onNext }) {
 			</Modal.Header>
 
 			<Modal.Body>
-				<p>{orderFields.name}</p>
-				<p>{orderFields.email}</p>
-				<p>{orderFields.tel}</p>
-				<p>{cart.total}</p>
-
+				<p>...</p>
+				<p>...</p>
+				<p>...</p>
 			</Modal.Body>
 
 			<Modal.Footer>
@@ -99,4 +91,4 @@ export default observer(function ({ onPrev, onNext }) {
 		</table> */}
 	</div>
 
-})
+}

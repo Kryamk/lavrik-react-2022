@@ -4,15 +4,13 @@ import { observer } from 'mobx-react-lite';
 // import cartStore from './store/cart';   // импорт напрямую
 import useStore from './hooks/useStore'; // импорт через кастомный хук
 
-export default observer(function({onPrev}) {
+export default observer(function({onPrev, orderData}) {
 	let [ cart ] = useStore('cart');
-	let [ order ] = useStore('order');
-	let orderFields = order.orderData();
 
 	return <div>
-		<h1>Hello {orderFields.name}</h1>
-		<p>Email: {orderFields.email}</p>
-		<p>Telephone: {orderFields.tel}</p>
+		<h1>Hello {orderData.name}</h1>
+		<p>{orderData.email}</p>
+		<p>{orderData.tel}</p>
 		{/* <p>Total: {cartStore.total}</p>  */}
 		<p>Total: {cart.total}</p>
 		<hr />

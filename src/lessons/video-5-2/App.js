@@ -34,18 +34,18 @@ export default function () {
 	// }
 
 	/* Order form */
-	/* let [ orderForm, setOrderForm] = useState([
+	let [ orderForm, setOrderForm] = useState([
 		{ name: 'email', label:'Email', value: '', valid: false, pattern: /^.+@.+$/ },
 		// { name: 'tel', label:'Tel', value: '', valid: false, pattern: /^\d{5,12}.+$/ },
 		{ name: 'tel', label:'Tel', value: '', valid: false, pattern: /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/ },
 		{ name: 'name', label:'Name', value: '', valid: false, pattern: /^.{2,}$/ }
-	]); */
+	]);
 
-	// let orderData = {};
-	// orderForm.forEach( item => { orderData[item.name] = item.value; });
+	let orderData = {};
+	orderForm.forEach( item => { orderData[item.name] = item.value; });
 
 
-	/* let orderFormUpdate = (name, value) => {
+	let orderFormUpdate = (name, value) => {
 		setOrderForm(orderForm.map( field => {
 			if (field.name !== name) {
 				return field;
@@ -53,7 +53,7 @@ export default function () {
 			let valid = field.pattern.test(value);
 			return {...field, value, valid};
 		}));
-	} */
+	}
 
 
 
@@ -66,15 +66,15 @@ export default function () {
 				}
 				{ page === 'order' &&
 					<Order
-					// fields={orderForm}
-					// onChange={orderFormUpdate}
+					fields={orderForm}
+					onChange={orderFormUpdate}
 					onPrev={moveToCart}
 					onNext={moveToResult} />
 				}
 				{ page === 'result' &&
 					<Result
 						onPrev={moveToOrder}
-						// orderData={orderData}
+						orderData={orderData}
 					/>
 				}
 				<hr />

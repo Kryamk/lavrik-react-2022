@@ -16,9 +16,6 @@ export class Cart {
 	}
 
 	remove = (id) => {
-		// console.log('---',this);
-		// console.log('---',this.products);
-		// console.log('---',this.change);
 		this.products = this.products.filter(pr => pr.id !== id);
 	}
 

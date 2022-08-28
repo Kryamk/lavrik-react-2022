@@ -8,12 +8,14 @@ import App from './current/App';
 // import App from './lessons/video-3-full/App'; // Подключение css, кастомные хуки
 // import App from './lessons/video-4-1/App'; // 00:58 Кастомный хук onClickOutside, children,  bootstrap modal
 // import App from './lessons/video-5-1/App'; // 00:50 hw - форма, данные в result, модалка
+// import App from './lessons/video-5-2/App'; // 00:50 Хранилище mobx с контекстом и кастомным хуком
 
 import storeContext from './current/contexts/store';
 import cartStore from './current/store/cart';
+import orderStore  from './current/store/order';
 const store = {
 	cart: cartStore,
-	testStore: 'testStore'
+	order: orderStore
 };
 
 ReactDom.render(

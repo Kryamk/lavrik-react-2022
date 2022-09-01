@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-import useStore from './hooks/useStore';
+import useStore from '../hooks/useStore';
 import { observer } from 'mobx-react-lite';
 
-export default observer(function ({ onPrev, onNext }) {
-	let [cart] = useStore('cart');
-	let [order] = useStore('order');
-	let { fields, orderFormUpdate, orderData } = order;
-	let orderFields = orderData();
+import { Link, useNavigate } from 'react-router-dom';
 
-	let isValid = fields.every(f => f.valid);
+export default observer(function () {
+	let [cart, order] = useStore('cart', 'order');
+	// let [order] = useStore('order');
+	let { form, orderFormUpdate, data, formValid } = order;
+	let orderFields = data;
+
+	let navigate = useNavigate();
+
+	// let isValid = form.every(f => f.valid);
 
 	let [modalShow, setModalShow] = useState(false);
 	let openModal = () => setModalShow(true);
@@ -24,7 +28,7 @@ export default observer(function ({ onPrev, onNext }) {
 	}
 	let onExited = () => {
 		if (confirmed) {
-			onNext();
+			navigate('/result');
 		}
 	}
 
@@ -34,7 +38,7 @@ export default observer(function ({ onPrev, onNext }) {
 		<hr />
 
 		<form className='bg-white p-3' action="#">
-			{fields.map(field => (
+			{form.map(field => (
 				<div className="form-group" key={field.name}>
 					<label>{field.label}</label>
 					<input
@@ -49,8 +53,8 @@ export default observer(function ({ onPrev, onNext }) {
 		</form>
 
 		<hr />
-		<button type='button' className='btn btn-warning' onClick={onPrev}>Back to cart</button>
-		<button type='button' className='btn btn-primary' onClick={openModal} disabled={!isValid}>Move to Result</button>
+		<Link className='btn btn-warning' to="/">Back to cart</Link>
+		<button type='button' className='btn btn-primary' onClick={openModal} disabled={!formValid}>Move to Result</button>
 
 		<Modal show={modalShow} onHide={closeModal} onExited={onExited}>
 			<Modal.Header closeButton>

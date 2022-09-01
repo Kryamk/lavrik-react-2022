@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDom from 'react-dom';
-
+import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import App from './current/App';
 // import App from './lessons/video-3/App'; // Тотал цены, удаление товара, ленивый инпут на стейтах и рефах
 // import App from './lessons/video-3-full/App'; // Подключение css, кастомные хуки
@@ -10,18 +9,19 @@ import App from './current/App';
 // import App from './lessons/video-5-1/App'; // 00:50 hw - форма, данные в result, модалка
 // import App from './lessons/video-5-2/App'; // 00:50 Хранилище mobx с контекстом и кастомным хуком
 
+
 import storeContext from './current/contexts/store';
-import cartStore from './current/store/cart';
-import orderStore  from './current/store/order';
-const store = {
-	cart: cartStore,
-	order: orderStore
-};
+import RootStore from './current/store';
+const store = new RootStore();
+
 
 ReactDom.render(
-	<storeContext.Provider value={store}>
-		<App/>
-	</storeContext.Provider>,
+
+	<BrowserRouter>
+		<storeContext.Provider value={store}>
+			<App/>
+		</storeContext.Provider>
+	</BrowserRouter>,
 	document.querySelector('.app')
 );
 

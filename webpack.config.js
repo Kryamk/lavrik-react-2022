@@ -11,7 +11,8 @@ let conf = {
 	devServer: {
 		static: {
 			directory: path.join(__dirname, '.'),
-		}
+		},
+		historyApiFallback: true,
 	},
 	module: {
 		rules: [

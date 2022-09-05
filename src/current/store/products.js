@@ -3,6 +3,11 @@ import { makeAutoObservable } from "mobx";
 export default class Products {
 	products = productsStub();
 
+	getProduct = (id) => {
+		// console.log('getId');
+		return this.products.find(pr => pr.id == id);
+	}
+
 	constructor(rootStore) {
 		makeAutoObservable(this);
 		this.rootStore = rootStore;

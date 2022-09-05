@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, toJS } from 'mobx';
 
 export default class Order {
 	form = [
@@ -22,6 +22,11 @@ export default class Order {
 	orderFormUpdate = (name, value) =>{
 		// console.log('---',this);
 		// console.log('---',this.form);
+		// let newForm = toJS(this.form);
+		// console.log('---',newForm);
+		this.form.forEach( el => {
+			console.log(el.name);
+		})
 
 		let field = this.form.find( f => f.name == name)
 		if ( field !== undefined ) {

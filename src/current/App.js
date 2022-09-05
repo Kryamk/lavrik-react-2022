@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
 import Home from './views/Home';
 import Product from './views/Product';
@@ -10,8 +11,10 @@ import E404 from './views/E404';
 
 import './style.css';
 
+import useStore from './hooks/useStore';
 
-export default function () {
+export default observer(function () {
+	let [ cartStore ] = useStore('cart');
 
 	return (
 		<>
@@ -22,7 +25,7 @@ export default function () {
 							Logo
 						</div>
 						<div className="col">
-							In cart: {}
+							In cart: {cartStore.total}
 						</div>
 					</div>
 				</div>
@@ -57,4 +60,4 @@ export default function () {
 			</footer>
 		</>
 	)
-}
+})

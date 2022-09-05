@@ -13,8 +13,12 @@ export default observer(Cart);
 function Cart() {
 	// let cart = cartStore; // 1й вариант с простым подключением
 	// let { cart } = useContext(StoreContext); // 2й вариант с контекстом
-	let [cart] = useStore('cart'); // 3й вариант с контекстом и кастомным хуком
-	let { products, total, remove, change } = cart;
+	// let [cart] = useStore('cart'); // 3й вариант с контекстом и кастомным хуком
+	// let { products, total, remove, change } = cart;
+	let [cartStore] = useStore('cart');
+
+	let items
+
 
 
 	return <div className='cart dark'>
@@ -37,7 +41,7 @@ function Cart() {
 						<td>{pr.price}</td>
 						<td>{pr.cnt}</td>
 						<td>{pr.cnt * pr.price}</td>
-						<td><MinMax min={1} max={pr.rest} current={pr.cnt} onChange={cnt => { change(pr.id, cnt) }} /></td>
+						<td><MinMax min={1} max={pr.rest} current={pr.cnt} onChange={cnt => { /* change(pr.id, cnt) */ }} /></td>
 						<td>
 							<button type="button" onClick={() => { remove(pr.id) }}>X</button>
 						</td>

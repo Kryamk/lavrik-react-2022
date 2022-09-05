@@ -8,12 +8,11 @@ import App from './current/App';
 // import App from './lessons/video-4-1/App'; // 00:58 Кастомный хук onClickOutside, children,  bootstrap modal
 // import App from './lessons/video-5-1/App'; // 00:50 hw - форма, данные в result, модалка
 // import App from './lessons/video-5-2/App'; // 00:50 Хранилище mobx с контекстом и кастомным хуком
-
+// import App from './lessons/video-6-full/App'; // rootStore, разделение на cart и products
 
 import storeContext from './current/contexts/store';
 import RootStore from './current/store';
 const store = new RootStore();
-
 
 ReactDom.render(
 

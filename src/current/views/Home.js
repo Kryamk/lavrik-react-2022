@@ -23,7 +23,12 @@ function Home() {
 							<h3>{pr.title}</h3>
 							<div>{pr.price}</div>
 							<Link to={`/product/${pr.id}`}>Read more</Link>
-							{cartStore.inCart(pr.id) ? 1 : 0}
+							<hr />
+
+							<button type="button" onClick={() => { cartStore.add(pr.id)}}>Add</button>
+							{cartStore.inCart(pr.id) ? <button type="button" onClick={() => { cartStore.remove(pr.id)}}>Remove</button> : null}
+
+
 						</div>
 					</div>
 				</div>

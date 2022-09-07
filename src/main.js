@@ -13,6 +13,8 @@ import App from './current/App';
 import storeContext from './current/contexts/store';
 import RootStore from './current/store';
 const store = new RootStore();
+store.products.load();
+store.cart.load();
 
 ReactDom.render(
 
@@ -84,3 +86,16 @@ obj.some(); // obj
 let some = obj.some;
 some(); // глобальный объект, window обычно
 */
+
+
+/* store.products.load().then(()=>{
+	ReactDom.render(
+
+		<BrowserRouter>
+			<storeContext.Provider value={store}>
+				<App/>
+			</storeContext.Provider>
+		</BrowserRouter>,
+		document.querySelector('.app')
+	);
+}); */

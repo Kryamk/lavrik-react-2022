@@ -3,33 +3,49 @@ import React from 'react';
 import useStore from '../hooks/useStore';
 import { observer } from 'mobx-react-lite';
 
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import E404 from './E404';
 
 
 export default observer(Product);
 function Product() {
-	let [productsStore] = useStore('products');
-	let params = useParams();
-	let navigate = useNavigate();
-	// console.log('---',navigate);
+	let [productsStore, cartStore] = useStore('products', 'cart');
+	let { id } = useParams();
 
-
-	let id = +params.id;
-	id = isNaN(id) ? null : id;
-
-	let product = productsStore.getProduct(id);
-	if (isNaN(id) || product === undefined) {
-		navigate('/404', {replace: true});
-		console.log('---',404);
+	let product = productsStore.item(id);
+	if (!/^[1-9]+\d*$/.test(id) || product === undefined) {
+		return <E404 />
 	}
-	function to404() {
-		navigate('/404', {replace: true});
-	}
-
 
 	return <div className='cart dark'>
-		<button type="button" onClick={()=>to404()}>404</button>
-		{/* <h1>{product.title}</h1> */}
+		<h1>{product.title}</h1>
+		<div><strong>Price: {product.price} </strong></div>
+		{cartStore.inCart(product.id) ?
+			<button className='btn btn-danger' type="button" onClick={() => { cartStore.remove(product.id) }}>Remove</button> :
+			<button className='btn btn-success' type="button" onClick={() => { cartStore.add(product.id) }}>Add</button>
+		}
 	</div>
 
 }
+
+
+
+
+
+/*
+	let id = +params.id;
+	let id = parseInt(params.id);
+	console.log('---',id);
+	id = isNaN(id) ? null : id;
+ */
+/*
+	if (!/^[1-9]+\d*$/.test(id)) {
+		console.log(1);
+		return <E404 />
+	}
+	let product = productsStore.item(id);
+	if ( product === undefined) {
+		console.log(2);
+		return <E404 />
+	}
+ */

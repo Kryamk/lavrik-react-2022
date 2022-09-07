@@ -1,11 +1,22 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
+
+const BASEURL = 'http://faceprog.ru/reactcourseapi';
 
 export default class Products {
-	products = productsStub();
+	products = [];
+	some = 1;
 
-	getProduct = (id) => {
-		// console.log('getId');
+	item(id) {
+		// console.log('item');
 		return this.products.find(pr => pr.id == id);
+	}
+
+	async load() {
+		let response = await fetch(`${BASEURL}/products/all.php`);
+		let products = await response.json();
+		runInAction(() => {
+			this.products = products;
+		})
 	}
 
 	constructor(rootStore) {
@@ -14,8 +25,7 @@ export default class Products {
 	}
 }
 
-
-function productsStub() {
+/* function productsStub() {
 	return [
 		{
 			id: 100,
@@ -42,7 +52,22 @@ function productsStub() {
 			rest: 8,
 		}
 	];
-}
-
+} */
 
 // export default new Cart();
+
+
+/*
+если синхронно действия выполняются
+proxy
+	action() {
+		block render
+		this.some = 2;
+		this.some = 3;
+		this.some = 4;
+		this.some = 5;
+		this.some = 6;
+		this.some = 7;
+		unblock render
+	}
+ */

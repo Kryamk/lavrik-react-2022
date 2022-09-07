@@ -6,10 +6,10 @@ import { observer } from 'mobx-react-lite';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-export default observer(function () {
-	let [cart, order] = useStore('cart', 'order');
+export default observer(function Order() {
+	let [cartStore, orderStore] = useStore('cart', 'order');
 	// let [order] = useStore('order');
-	let { form, orderFormUpdate, data, formValid } = order;
+	let { form, orderFormUpdate, data, formValid } = orderStore;
 	let orderFields = data;
 
 	let navigate = useNavigate();
@@ -25,6 +25,8 @@ export default observer(function () {
 	let sendForm = () => {
 		setConfirmed(true);
 		closeModal();
+		cartStore.clean();
+		orderStore.clean();
 	}
 	let onExited = () => {
 		if (confirmed) {
@@ -65,7 +67,7 @@ export default observer(function () {
 				<p>{orderFields.name}</p>
 				<p>{orderFields.email}</p>
 				<p>{orderFields.tel}</p>
-				<p>{cart.total}</p>
+				<p>{cartStore.total}</p>
 
 			</Modal.Body>
 

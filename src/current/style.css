@@ -11,3 +11,21 @@ body {
 .cart.dark {
 	background: darkcyan;
 }
+th {
+	text-align: center;
+}
+th,td {
+	padding: 5px;
+	border: 1px solid orange;
+}
+li a.active {
+	color: red;
+}
+table {
+	width: 100%;
+}
+
+.isprocess {
+	pointer-events: none;
+	opacity: 0.5;
+}

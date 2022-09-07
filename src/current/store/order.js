@@ -7,6 +7,8 @@ export default class Order {
 		{ name: 'name', label:'Name', value: '', valid: false, pattern: /^.{2,}$/ }
 	]
 
+	lastFormData = {};
+
 	get formValid() {
 		return this.form.every(f => f.valid);
 	}
@@ -20,28 +22,18 @@ export default class Order {
 	}
 
 	orderFormUpdate = (name, value) =>{
-		// console.log('---',this);
-		// console.log('---',this.form);
-		// let newForm = toJS(this.form);
-		// console.log('---',newForm);
-		this.form.forEach( el => {
-			console.log(el.name);
-		})
-
 		let field = this.form.find( f => f.name == name)
 		if ( field !== undefined ) {
 			field.value = value.trim();
 			field.valid = field.pattern.test(field.value);
 		}
+	}
 
-
-		// this.form = this.form.map( field => {
-		// 	if (field.name !== name) {
-		// 		return field;
-		// 	}
-		// 	let valid = field.pattern.test(value);
-		// 	return {...field, value, valid};
-		// });
+	clean = () => {
+		this.lastFormData = this.data;
+		this.form.forEach(item => {
+			item.value = '';
+		})
 	}
 
 
@@ -52,3 +44,30 @@ export default class Order {
 }
 
 // export default new Order();
+
+
+
+/* orderFormUpdate = (name, value) =>{
+	// console.log('---',this);
+	// console.log('---',this.form);
+	// let newForm = toJS(this.form);
+	// console.log('---',newForm);
+	// this.form.forEach( el => {
+	// 	console.log(el.name);
+	// })
+
+	let field = this.form.find( f => f.name == name)
+	if ( field !== undefined ) {
+		field.value = value.trim();
+		field.valid = field.pattern.test(field.value);
+	}
+
+
+	// this.form = this.form.map( field => {
+	// 	if (field.name !== name) {
+	// 		return field;
+	// 	}
+	// 	let valid = field.pattern.test(value);
+	// 	return {...field, value, valid};
+	// });
+} */

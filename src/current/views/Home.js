@@ -8,8 +8,10 @@ import { Link } from 'react-router-dom';
 
 export default observer(Home);
 function Home() {
+	// console.log('render Home');
 	let [productsStore, cartStore] = useStore('products', 'cart');
 	let { products } = productsStore;
+
 
 
 	return <div className='cart dark'>
@@ -25,8 +27,11 @@ function Home() {
 							<Link to={`/product/${pr.id}`}>Read more</Link>
 							<hr />
 
-							<button type="button" onClick={() => { cartStore.add(pr.id)}}>Add</button>
-							{cartStore.inCart(pr.id) ? <button type="button" onClick={() => { cartStore.remove(pr.id)}}>Remove</button> : null}
+
+							{cartStore.inCart(pr.id) ?
+								<button className='btn btn-danger' type="button" onClick={() => { cartStore.remove(pr.id) }}>Remove</button> :
+								<button className='btn btn-success' type="button" onClick={() => { cartStore.add(pr.id) }}>Add</button>
+							}
 
 
 						</div>

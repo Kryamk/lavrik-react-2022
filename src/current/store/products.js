@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-const BASEURL = 'http://faceprog.ru/reactcourseapi';
+
+// const BASEURL = 'http://faceprog.ru/reactcourseapi';
 
 export default class Products {
 	products = [];
@@ -12,8 +13,11 @@ export default class Products {
 	}
 
 	async load() {
-		let response = await fetch(`${BASEURL}/products/all.php`);
-		let products = await response.json();
+		// let response = await fetch(`${BASEURL}/products/all.php`);
+		// let products = await response.json();
+		// console.log('---',this.api);
+		let products = await this.api.load();
+
 		runInAction(() => {
 			this.products = products;
 		})
@@ -22,6 +26,8 @@ export default class Products {
 	constructor(rootStore) {
 		makeAutoObservable(this);
 		this.rootStore = rootStore;
+		this.api = this.rootStore.api.products;
+		// console.log('---',this.api);
 	}
 }
 

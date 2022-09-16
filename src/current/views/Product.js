@@ -21,8 +21,8 @@ function Product() {
 		<h1>{product.title}</h1>
 		<div><strong>Price: {product.price} </strong></div>
 		{cartStore.inCart(product.id) ?
-			<button className='btn btn-danger' type="button" onClick={() => { cartStore.remove(product.id) }}>Remove</button> :
-			<button className='btn btn-success' type="button" onClick={() => { cartStore.add(product.id) }}>Add</button>
+			<button disabled={cartStore.isProcess(product.id)} className='btn btn-danger' type="button" onClick={() => { cartStore.remove(product.id) }}>Remove</button> :
+			<button disabled={cartStore.isProcess(product.id)} className='btn btn-success' type="button" onClick={() => { cartStore.add(product.id) }}>Add</button>
 		}
 	</div>
 

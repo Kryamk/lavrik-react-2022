@@ -31,6 +31,7 @@ export default class Order {
 
 	clean = () => {
 		this.lastFormData = this.data;
+		this.lastFormData.totalFinal = this.rootStore.cart.total;
 		this.form.forEach(item => {
 			item.value = '';
 		})

@@ -5,11 +5,12 @@ import style from './style.module.css';
 
 MinMaxLazy.propTypes = propTypes;
 
-function MinMaxLazy ({ min=1, max, current, onChange }) {
+function MinMaxLazy({ min = 1, max, current, onChange }) {
+	// console.log('render MinMaxLazy');
 	let inp = useRef();
 
 	function onKeyPress(e) {
-		if ( e.key === 'Enter') {
+		if (e.key === 'Enter') {
 			parseCurrentStr(e);
 		}
 	}
@@ -26,7 +27,7 @@ function MinMaxLazy ({ min=1, max, current, onChange }) {
 	function dec() { applyCurrent(current - 1) }
 	function inc() { applyCurrent(current + 1) }
 
-	useEffect( () => {
+	useEffect(() => {
 		inp.current.value = current;
 	}, [current]);
 
@@ -53,4 +54,5 @@ function MinMaxLazy ({ min=1, max, current, onChange }) {
 
 
 
-export default MinMaxLazy
+// export default MinMaxLazy;
+export default MinMaxLazy;

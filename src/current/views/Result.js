@@ -15,7 +15,8 @@ export default observer(function() {
 		<h1>{orderFields.name}, you order is done!</h1>
 		<p>Email: {orderFields.email}</p>
 		<p>Telephone: {orderFields.tel}</p>
-		<p>Total: {cartStore.total}</p>
+		{/* <p>Total: {cartStore.total}</p> */}
+		<p>Total: {orderFields.totalFinal}</p>
 		<hr />
 		<Link className='btn btn-primary' to='/order'>Prev</Link>
 	</div>
